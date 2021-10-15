@@ -65,12 +65,12 @@
         <div class="margin-xs padding-sm radius shadow bg-white tag-block" style="flex:1; overflow: auto;">
             {{test}}
             <div class="num-tag-list">
-                <div v-for="item in itemList" class="cu-tag radius num-tag"
+                <div v-for="(item,index) in itemList" class="cu-tag radius num-tag"
                      style="min-width: 150upx;"
-                     @click="clickTag(item)"
+                     @click="clickTag(item,index)"
                      :style="{'background-color':item.color+'!important'
                         ,'color':item.enable?'white':'black'
-                     ,'text-decoration':item.enable?'auto':'line-through'
+                     ,'text-decoration':item.enable?'none':'line-through'
 
                      }">
                     {{item.value}}
@@ -175,8 +175,8 @@
             },
         },
         methods: {
-            clickTag(item) {
-                item.enable = !item.enable
+            clickTag(item, index) {
+                this.$set(this.itemList[index], 'enable', !item.enable)
                 this.check()
             },
             clickShowCompare() {
